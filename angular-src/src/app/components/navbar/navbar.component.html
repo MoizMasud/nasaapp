@@ -1,0 +1,23 @@
+<nav class="nav navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">NASA Web App</a>
+        </div>
+
+          <div id= navbar class="nav navbar-nav navbar-left">
+            <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+              <a [routerLink]="['/']">Home</a></li>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+
+            <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+              <a [routerLink]="['/login']">Login</a></li>
+
+
+            <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+              <a [routerLink]="['/register']">Register</a></li>
+          </ul>
+
+      </div>
+    </nav>
