@@ -61,6 +61,12 @@ app.get('/',(req,res)=>{
   res.send("invalid endpoint");//sending out a string
 });
 
+
+//make sure every route aside from the ones we specified, goes to the index.html files
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'public/index.html'));
+});
+
 //defining what port
 const port=3000;
 app.listen(port, ()=>{

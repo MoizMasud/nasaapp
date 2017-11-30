@@ -54,7 +54,7 @@ User.getUserByUsername(username,(err,user)=>{
       //a response to the front end from database if the password matches
       res.json({
         success:true,//worked, they validated
-        token:'JWT' + token,
+        token:'JWT ' + token,
         user:{
           id: user._id,
           name: user.name,
