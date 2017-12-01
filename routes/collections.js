@@ -5,13 +5,18 @@ const jwt =require('jsonwebtoken');
 const Collection=require('../models/collection');
 const config=require('../config/database');
 
-router.post('/allcollections', (req, res, next) => {
+router.post('/postcollections', (req, res, next) => {
   //create a new collection for the database
   let newCollection= new Collection({
     name:req.body.name,//get from the postman
+    images:req.body.images,
+    isPrivate:req.body.isPrivate,
+    discription:req.body.discription,
     date:req.body.date,
-    images:req.body.images
+    rating:req.body.rating
   });
+
+
 //add to database, and send the response
 Collection.addCollection(newCollection,(err,collection)=>{
   if(err){
@@ -20,6 +25,18 @@ Collection.addCollection(newCollection,(err,collection)=>{
     res.json({success:true,msg:'Collection added'});
     }
   });
+});
+
+
+router.get('/allcollections',(req,res,next)=>{
+  Collection.find((err, CollectionSchema)=>{
+    if(err){throw err;}
+    res.json({success:true,CollectionSchema,msg:"Collections returned"});
+  });
+});
+
+router.get('/mycollections', passport.authenticate('jwt',{session:false}),(req, res,next) => {
+ res.json({collection: req.name});
 });
 //ALWAYS NEED THIS!
 module.exports=router;

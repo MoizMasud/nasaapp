@@ -17,6 +17,16 @@ export class AuthService {
       return this.http.post('http://localhost:3000/users/register', user,{headers: headers})
         .map(res => res.json());
     }
+
+    registerCollection(collection){
+        let headers = new Headers();
+        headers.append('Content-Type','application/json');
+        return this.http.post('http://localhost:3000/collections/postcollections', collection,{headers: headers})
+          .map(res => res.json());
+      }
+
+
+
     //make a post request to authenticateUser
     //we pass the user and header along in the post method.
     authenticateUser(user){
@@ -38,6 +48,18 @@ export class AuthService {
       return this.http.get('http://localhost:3000/users/profile',{headers: headers})
         .map(res => res.json());
     }
+
+    getCollections(){
+      let headers = new Headers();
+      this.loadToken();
+      //add an extra header for the id_token varification
+      headers.append('Authorization', this.authToken);
+      headers.append('Content-Type','application/json');
+      return this.http.get('http://localhost:3000/collections/mycollections',{headers: headers})
+        .map(res => res.json());
+    }
+
+
 
     storeUserData(token,user){
       //save it in local storage. setItem takes a key and an item.

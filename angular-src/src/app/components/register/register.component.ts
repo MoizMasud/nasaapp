@@ -54,7 +54,7 @@ constructor(
       this.router.navigate(['/login']);//redirect the page
     } else {
       this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
-      this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
   });
 

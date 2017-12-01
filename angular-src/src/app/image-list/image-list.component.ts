@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
+import {FlashMessagesService} from 'angular2-flash-messages/module';
 
 @Component({
   selector: 'app-image-list',
@@ -11,19 +12,27 @@ export class ImageListComponent implements OnInit {
   imagesFound: boolean = false;
   searching: boolean = false;
 
+  constructor(
+    private _imageService : ImageService,
+    private flashMessage:FlashMessagesService,
+  ) { }
+
   handleSuccess(data){
+    try{
     this.imagesFound = true;
     this.images = data.collection.items;
     console.log(data.collection.items);
     console.log(data.collection.items[0].links[0]["href"])
     console.log(data.collection.items[0].data[0]["description"])
+    }
+  catch(e){this.flashMessage.show("Please input a valid search", {cssClass:'alert-danger',timeout:3000});}
   }
 
   handleError(error){
     console.log(error);
   }
 
-  constructor(private _imageService : ImageService) { }
+
 
   searchImages(query: string){
     this.searching = true;

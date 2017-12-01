@@ -11,6 +11,7 @@
               <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
                 <a [routerLink]="['/collection']">Public Image Collections</a></li>
 
+
           </div>
 
           <ul class="nav navbar-nav navbar-right">
@@ -22,6 +23,9 @@
             <!-- only show these when logged in, so use the tokenNotExpired guard -->
             <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
               <a [routerLink]="['/dashboard']">Dashboard</a></li>
+
+              <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+              <a [routerLink]="['/usercollection']">Create A Collection</a></li>
 
               <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
                 <a [routerLink]="['/profile']">Profile</a></li>

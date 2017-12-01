@@ -14,19 +14,20 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ImageListComponent } from './image-list/image-list.component';
 import { CollectionComponent } from './components/collection/collection.component'
-
+import { UserCollectionComponent } from './components/user-collection/user-collection.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {FlashMessagesModule} from 'angular2-flash-messages/module';
 import {AuthGuard} from './guards/auth.guard';
 import {ImageService} from './services/image.service';
-
+import {UserCollectionService} from './services/user-collection.service';
 
 //creating routes for out components
 const appRoutes: Routes=[
   {path:'',component:HomeComponent},//home page
   {path:'register',component:RegisterComponent},
   {path:'collection',component:CollectionComponent},
+  {path:'usercollection',component:UserCollectionComponent},
   {path:'login',component:LoginComponent},
   {path:'dashboard',component:DashboardComponent, canActivate:[AuthGuard]},//canActivate protects it and makes it private from front end
   {path:'profile',component:ProfileComponent, canActivate:[AuthGuard]}
@@ -42,7 +43,8 @@ const appRoutes: Routes=[
     DashboardComponent,
     ProfileComponent,
     ImageListComponent,
-    CollectionComponent
+    CollectionComponent,
+    UserCollectionComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,7 @@ const appRoutes: Routes=[
     FlashMessagesModule.forRoot()
   ],
   //services go in providers in the app module
-  providers: [ValidateService, AuthService,AuthGuard,ImageService],
+  providers: [ValidateService, AuthService,AuthGuard,ImageService,UserCollectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

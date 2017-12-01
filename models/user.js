@@ -21,11 +21,6 @@ const UserSchema=mongoose.Schema({
   password:{
     type:String,
     required:true
-  },
-  collections:{
-    name:String,
-    type:String,
-    required:false
   }
 });
 

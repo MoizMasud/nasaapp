@@ -9,13 +9,27 @@ const CollectionSchema=mongoose.Schema({
     required:true
   },
   date:{
-    type:String,
-    required:true //an email is required
+    type:Date,
+    required:false
   },
   images:{
+    type:[],
+    required:false
+  },
+  isPrivate:{
+    type:Boolean,
+    required:true
+  },
+  discription:{
     type:String,
     required:true
+  },
+
+  rating:{
+    type:String,
+    required:false
   }
+
 });
 
 //exporting the model.

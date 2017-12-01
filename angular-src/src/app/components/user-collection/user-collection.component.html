@@ -1,0 +1,19 @@
+<h2 class="page-header">Create Collection</h2>
+<!-- created an event, called submit for the form, and Onregister is in the RegisterComponent -->
+<form (submit)="onCollectionSubmit()">
+  <div class="form-group">
+    <label>Collection Name</label>
+    <!-- add the ng model with a attribute called name, so we can access the forms from the register.component -->
+    <input type="text" [(ngModel)]="name" name="name" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Discription</label>
+    <input type="text" [(ngModel)]="discription" name="discription" class="form-control">
+  </div>
+  <form #f="ngForm">
+     <input type="radio" value="true" name="isPrivate" [(ngModel)]="isPrivate"> Private
+     <input type="radio" value="false" name="isPrivate" [(ngModel)]="isPrivate"> Public
+   </form>
+
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form>
