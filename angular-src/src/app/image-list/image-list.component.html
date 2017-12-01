@@ -1,0 +1,8 @@
+
+<input class="search" [(ngModel)]="input" placeholder="Search for images">
+<button (click)="searchImages(input)">Find Image</button>
+
+<div *ngFor="let image of images" class="image-container">
+    <img [src]= "image.links[0]['href']" />
+    <p>Discritpion: {{image.data[0]["description"]}}</p>
+</div>

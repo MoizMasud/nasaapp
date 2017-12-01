@@ -21,6 +21,11 @@ const UserSchema=mongoose.Schema({
   password:{
     type:String,
     required:true
+  },
+  collections:{
+    name:String,
+    type:String,
+    required:false
   }
 });
 
@@ -35,6 +40,11 @@ module.exports.getUserById=function(id,callback){
 
 module.exports.getUserByUsername=function(username,callback){
   const query={username:username}
+  User.findOne(query, callback)
+}
+
+module.exports.getCollectionByname=function(name,callback){
+  const query={collections:name}
   User.findOne(query, callback)
 }
 

@@ -32,6 +32,9 @@ const app=express();
 //all user routes put in a seperate file
 const users=require('./routes/users');
 
+//all collection routes are put in a seperate files
+const collections=require('./routes/collections');
+
 app.use(cors());//later useful for authentication, because we can disable some routes to the user if not loged in
 
 //Body Parser middleware
@@ -46,7 +49,8 @@ app.use(passport.session());
 require('./config/passport')(passport);//passing in passport
 //anything that is localhost:3000/user/WHATEVER will go to the user file and in that file it'll go to the WHATEVER Route
 app.use('/users',users);
-
+//same as above ^^
+app.use('/collections',collections);
 
 //we need a Place to put the client side files
 //set static file

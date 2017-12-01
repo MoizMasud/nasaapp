@@ -17,7 +17,6 @@ router.post('/register', (req, res, next) => {
     password:req.body.password// this is a plain text password, when it runs through bcrypt it gets hashed and goes into the database
   });
 
-
 //add the user to the user model, display some message letting the user know if hes added or not
   User.addUser(newUser,(err,user)=>{
     if(err){

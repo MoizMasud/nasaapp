@@ -7,12 +7,17 @@
           <div id= navbar class="nav navbar-nav navbar-left">
             <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
               <a [routerLink]="['/']">Home</a></li>
+
+              <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+                <a [routerLink]="['/collection']">Public Image Collections</a></li>
+
           </div>
 
           <ul class="nav navbar-nav navbar-right">
 
             <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
               <a [routerLink]="['/login']">Login</a></li>
+
 
             <!-- only show these when logged in, so use the tokenNotExpired guard -->
             <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
