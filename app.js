@@ -52,6 +52,8 @@ app.use('/users',users);
 //same as above ^^
 app.use('/collections',collections);
 
+
+
 //we need a Place to put the client side files
 //set static file
 //we called the file public

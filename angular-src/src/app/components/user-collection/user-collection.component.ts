@@ -11,11 +11,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./user-collection.component.css']
 })
 export class UserCollectionComponent implements OnInit {
-
+  collection:Object;
   name:String;
   images:any[];
   isPrivate:String;
   discription:String;
+
   constructor(
   private userCollectionService: UserCollectionService,
   private authService:AuthService,
@@ -35,8 +36,11 @@ export class UserCollectionComponent implements OnInit {
     else{
       var isPrivatebool=false;
     }
-
+var temp=localStorage.getItem('user');
+var temp1=temp.split(":");
+var temp2=temp1[2].slice(1,-2)
     const collection = {//created user object
+      createdBy:temp2,
       name: this.name,
       isPrivate: isPrivatebool,
       discription:this.discription

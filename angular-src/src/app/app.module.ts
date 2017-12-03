@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {RouterModule,Routes} from '@angular/router'
+import {RouterModule,Routes} from '@angular/router';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import {FlashMessagesModule} from 'angular2-flash-messages/module';
 import {AuthGuard} from './guards/auth.guard';
 import {ImageService} from './services/image.service';
 import {UserCollectionService} from './services/user-collection.service';
+import { MycollectionComponent } from './components/mycollection/mycollection.component';
 
 //creating routes for out components
 const appRoutes: Routes=[
@@ -30,7 +32,8 @@ const appRoutes: Routes=[
   {path:'usercollection',component:UserCollectionComponent},
   {path:'login',component:LoginComponent},
   {path:'dashboard',component:DashboardComponent, canActivate:[AuthGuard]},//canActivate protects it and makes it private from front end
-  {path:'profile',component:ProfileComponent, canActivate:[AuthGuard]}
+  {path:'profile',component:ProfileComponent, canActivate:[AuthGuard]},
+  {path:'mycollection',component:MycollectionComponent}
 ]
 
 @NgModule({
@@ -44,14 +47,18 @@ const appRoutes: Routes=[
     ProfileComponent,
     ImageListComponent,
     CollectionComponent,
-    UserCollectionComponent
+    UserCollectionComponent,
+    MycollectionComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    NgxPaginationModule,
+
   ],
   //services go in providers in the app module
   providers: [ValidateService, AuthService,AuthGuard,ImageService,UserCollectionService],

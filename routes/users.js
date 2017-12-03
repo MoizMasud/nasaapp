@@ -4,8 +4,16 @@ const passport=require('passport');
 const jwt =require('jsonwebtoken');
 const User=require('../models/user');
 const config=require('../config/database')
+const mailer=require('nodemailer')
 
 //insted of app.get now it's router.get
+// const transporter = mailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: process.env.GMAIL_USER,
+//     pass: process.env.GMAIL_PASS,
+//   },
+// });
 
 //This route is localhost:3000/users/register
 router.post('/register', (req, res, next) => {
@@ -23,11 +31,41 @@ router.post('/register', (req, res, next) => {
       res.json({success:false, msg:'Failed to register user'});
     }else{
       res.json({success:true,msg:'User registered'});
+    //   try{
+    //     const emailToken=jwt.sign(
+    //       {
+    //       user:_.pick(user,'id'),
+    //     },EMAIL_SECRET,
+    //     {
+    //       expiresIn: '1d',
+    //     },
+    //     );
+    //
+    //
+    //   const url='http://localhost:3000/confirmation/${emailToken}';
+    //
+    // await transporter.sendMail({
+    //   to: req.body.email,
+    //   subject:'Confirm Email',
+    //   html:'Please click this: <a href="${url}">${url}</a>'
+    // });
+    // }catch(e){console.log(e);}
+
+
     }
   });
 });
 
+router.get('/confirmation/:token', async (req, res) => {
+  try {
+    const { user: { id } } = jwt.verify(req.params.token, EMAIL_SECRET);
+    await models.User.update({ confirmed: true }, { where: { id } });
+  } catch (e) {
+    res.send('error');
+  }
 
+  return res.redirect('http://localhost:4200/login');
+});
 
 //authentication
 router.post('/authenticate', (req, res, next) => {
@@ -41,6 +79,12 @@ User.getUserByUsername(username,(err,user)=>{
   if(!user){//if there is not a user returned, then we want to send a response to the client
     return res.json({success:false,msg:'User not found'});
   }
+  if(!user.confirmed){
+    return res.json({success:false,msg:'Please confirm your email'});
+  }
+
+
+
 
   //if there is a user, compare the entered password with the user password
   User.comparePassword(password,user.password,(err,isMatch)=>{

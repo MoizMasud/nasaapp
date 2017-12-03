@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
-import {FlashMessagesService} from 'angular2-flash-messages/module';
+import {FlashMessagesService} from 'angular2-flash-messages/';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   username:String;
   email:String;
   password:String;
+
 //anytime you use a service in a component, u need to inject it as such
 constructor(
   private validateservice: ValidateService,

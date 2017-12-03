@@ -21,9 +21,7 @@ export class ImageListComponent implements OnInit {
     try{
     this.imagesFound = true;
     this.images = data.collection.items;
-    console.log(data.collection.items);
-    console.log(data.collection.items[0].links[0]["href"])
-    console.log(data.collection.items[0].data[0]["description"])
+
     }
   catch(e){this.flashMessage.show("Please input a valid search", {cssClass:'alert-danger',timeout:3000});}
   }

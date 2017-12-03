@@ -6,6 +6,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 export class AuthService {
   authToken:any;
   user:any;
+  colletion:any;
 
   constructor(private http:Http) { }
 
@@ -50,12 +51,9 @@ export class AuthService {
     }
 
     getCollections(){
-      let headers = new Headers();
-      this.loadToken();
-      //add an extra header for the id_token varification
-      headers.append('Authorization', this.authToken);
+        let headers = new Headers();
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/collections/mycollections',{headers: headers})
+      return this.http.get('http://localhost:3000/collections/mycollections',{headers:headers})
         .map(res => res.json());
     }
 

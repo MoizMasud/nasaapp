@@ -21,6 +21,16 @@ const UserSchema=mongoose.Schema({
   password:{
     type:String,
     required:true
+  },
+
+  confirmed:{
+    type:Boolean,
+    default: false
+  }, //account wont be activated until we set this to true
+
+  tempToken:{
+    type:String,
+    required:true
   }
 });
 
@@ -38,10 +48,7 @@ module.exports.getUserByUsername=function(username,callback){
   User.findOne(query, callback)
 }
 
-module.exports.getCollectionByname=function(name,callback){
-  const query={collections:name}
-  User.findOne(query, callback)
-}
+
 
 //hash the password using genSalt(), genSalt generates a random key
 module.exports.addUser=function(newUser,callback){

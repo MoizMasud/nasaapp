@@ -8,6 +8,7 @@ const config=require('../config/database');
 router.post('/postcollections', (req, res, next) => {
   //create a new collection for the database
   let newCollection= new Collection({
+    createdBy:req.body.createdBy,
     name:req.body.name,//get from the postman
     images:req.body.images,
     isPrivate:req.body.isPrivate,
@@ -35,8 +36,14 @@ router.get('/allcollections',(req,res,next)=>{
   });
 });
 
-router.get('/mycollections', passport.authenticate('jwt',{session:false}),(req, res,next) => {
- res.json({collection: req.name});
+router.get('/mycollections',(req, res,next) => {
+ Collection.find(({createdBy:req.query.createdBy}), (err,Collections)=>{
+   if(err){
+     res.json({success:false,msg:'Failed to find collection'});
+   }else{
+     res.json({success:true,Collections,msg:'Collection Found'});
+   }
+ })
 });
 //ALWAYS NEED THIS!
 module.exports=router;

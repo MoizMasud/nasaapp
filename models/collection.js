@@ -4,6 +4,10 @@ const config=require('../config/database');
 
 //Collection SCHEMA
 const CollectionSchema=mongoose.Schema({
+  createdBy:{
+    type:String,
+    required:true
+  },
   name: {
     type: String,
     required:true
